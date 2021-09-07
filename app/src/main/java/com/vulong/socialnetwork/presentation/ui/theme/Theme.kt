@@ -15,7 +15,7 @@ private val DarkColorPalette = darkColors(
 
 @Composable
 fun SocialNetworkTheme(
-    content: @Composable() () -> Unit,
+    content: @Composable () -> Unit,
 ) {
 
     MaterialTheme(

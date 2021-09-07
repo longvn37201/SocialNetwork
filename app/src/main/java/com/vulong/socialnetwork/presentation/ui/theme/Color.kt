@@ -9,3 +9,4 @@ val LightGray = Color(0xFF606060)
 
 val GreenAccent = Color(0xFF08FF04)
 val TextWhite = Color(0xFFEEEEEE)
+val TextGray = Color(0xFFA6A6A6)

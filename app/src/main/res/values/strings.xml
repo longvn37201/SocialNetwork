@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Social Network</string>
+    <string name="login_text">Login</string>
+    <string name="password_hint">Password</string>
+    <string name="username_and_email_hint">Username / Email</string>
+    <string name="dont_have_account_text">Don\'t have an account yet?</string>
+    <string name="register_text">Register</string>
+    <string name="email_hint">Email</string>
+    <string name="already_have_an_account_text">Already have an account?</string>
+    <string name="username_hint">Username</string>
+    <string name="test_text">Hdajsodahfkasfkhaskdhsakdhkahdwuiwqkyehoqwhendknasd asd hasddhkashd als hdkasdh yqwiuey qowyeoqwj dsqw dsqwod ahsodh ks dqw hdqjwkhd ksad aos dhaskd haskdHdajsodahfkasfkhaskdhsakdhkahdwuiwqkyehoqwhendknasd asd hasddhkashd als hdkasdh yqwiuey qowyeoqwj dsqw dsqwod ahsodh ks dqw hdqjwkhd ksad aos dhaskd haskd</string>
+    <string name="news_feed_text">News feed</string>
+    <string name="post_text">Post</string>
+    <string name="comments_text">Comments</string>
 </resources>
