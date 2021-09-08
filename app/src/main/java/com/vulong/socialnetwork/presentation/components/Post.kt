@@ -54,6 +54,7 @@ fun Post(
                 .clip(MaterialTheme.shapes.medium)
                 .background(MediumGray)
         ) {
+            //image
             Image(
                 modifier = Modifier
                     .fillMaxWidth(),

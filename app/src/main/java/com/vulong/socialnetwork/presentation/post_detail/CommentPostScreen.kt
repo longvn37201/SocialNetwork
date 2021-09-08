@@ -4,35 +4,37 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.vulong.socialnetwork.R
 import com.vulong.socialnetwork.domain.models.Comment
 import com.vulong.socialnetwork.domain.models.Post
-import com.vulong.socialnetwork.presentation.ui.theme.SpaceMedium
-import com.vulong.socialnetwork.presentation.ui.theme.SpaceSmall
-import com.vulong.socialnetwork.presentation.ui.theme.TextWhite
+import com.vulong.socialnetwork.presentation.ui.theme.*
 
 @Composable
 fun CommentPostScreen(
     appNavController: NavController,
     post: Post = Post("", "", "", "", 5, 5),
+    commentViewModel: CommentViewModel = viewModel(),
 ) {
     Scaffold(
         topBar = {
@@ -55,18 +57,77 @@ fun CommentPostScreen(
                 elevation = 0.dp
             )
         },
-    ) {
-        Column {
-            Comment()
-            Comment()
-            Comment()
+        bottomBar = {
+            TextField(
+                value = commentViewModel.commentText.value,
+                onValueChange = { commentViewModel.setUsernameText(it) },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(SpaceSmall, SpaceSmall, SpaceSmall, SpaceSmall),
+                trailingIcon = {
+                    if (commentViewModel.commentText.value.trim().isNotEmpty()) {
+                        IconButton(
+                            onClick = {
+                                //todo send cmt
+                            },
+                        ) {
+                            Icon(imageVector = Icons.Filled.Send,
+                                contentDescription = "post comment",
+                                tint = MaterialTheme.colors.primary)
+                        }
+                    } else {
+                        IconButton(
+                            onClick = {},
+                            enabled = false
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Send,
+                                contentDescription = "post comment",
+                            )
+                        }
+                    }
+                },
+                colors = TextFieldDefaults.textFieldColors(
+                    backgroundColor = MaterialTheme.colors.surface,
+                    focusedIndicatorColor = Color.Transparent, //hide the indicator
+                    unfocusedIndicatorColor = Color.Transparent
+                ),
+                maxLines = 10,
+                textStyle = TextStyle(color = TextWhite)
+            )
+        }
+    ) { contentPadding ->
+        LazyColumn(Modifier.padding(contentPadding)) {
+            item {
+                Spacer(modifier = Modifier.height(SpaceMedium))
+            }
+            item {
+                CommentItem(Comment())
+
+            }
+            item {
+                Spacer(modifier = Modifier.height(SpaceMedium))
+
+            }
+            item {
+                CommentItem(Comment())
+
+            }
+            item {
+                Spacer(modifier = Modifier.height(SpaceMedium))
+
+            }
+            item {
+                CommentItem(Comment())
+
+            }
         }
 
     }
 }
 
 @Composable
-fun Comment(comment: Comment) {
+fun CommentItem(comment: Comment) {
     Column(
         Modifier
             .fillMaxWidth()

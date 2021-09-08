@@ -8,5 +8,6 @@ val HintGray = Color(0xFF6D6D6D)
 val LightGray = Color(0xFF606060)
 
 val GreenAccent = Color(0xFF08FF04)
+val PinkAccent = Color(0xFFFF00FB)
 val TextWhite = Color(0xFFEEEEEE)
 val TextGray = Color(0xFFA6A6A6)

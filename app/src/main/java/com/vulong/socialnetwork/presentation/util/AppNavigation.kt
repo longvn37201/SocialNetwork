@@ -9,6 +9,7 @@ import com.vulong.socialnetwork.presentation.login.LoginScreen
 import com.vulong.socialnetwork.presentation.login.LoginViewModel
 import com.vulong.socialnetwork.presentation.main.MainScreen
 import com.vulong.socialnetwork.presentation.post_detail.CommentPostScreen
+import com.vulong.socialnetwork.presentation.post_detail.CommentViewModel
 import com.vulong.socialnetwork.presentation.register.RegisterScreen
 import com.vulong.socialnetwork.presentation.register.RegisterViewModel
 
@@ -38,8 +39,10 @@ fun AppNavigation() {
             )
         }
         composable(Screen.PostComment.route) {
+            val commentViewModel = hiltViewModel<CommentViewModel>()
             CommentPostScreen(
                 appNavController = appNavController,
+                commentViewModel = commentViewModel
             )
         }
     }
