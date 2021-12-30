@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,20 +25,32 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.vulong.socialnetwork.R
 import com.vulong.socialnetwork.presentation.components.ActionRow
+import com.vulong.socialnetwork.presentation.navigation.Screen
 import com.vulong.socialnetwork.presentation.ui.theme.*
 import com.vulong.socialnetwork.util.Constants
+import me.onebone.toolbar.CollapsingToolbarScaffold
+import me.onebone.toolbar.ScrollStrategy
+import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 
 @Composable
-fun ProfileScreen(appNavController: NavController) {
-    Scaffold(
-        topBar = {
+fun ProfileScreen(
+    appNavController: NavController,
+//    user: User = User(),
+) {
+    CollapsingToolbarScaffold(
+        state = rememberCollapsingToolbarScaffoldState(), // provide the state of the scaffold
+        modifier = Modifier,
+        scrollStrategy = ScrollStrategy.EnterAlways,
+        toolbar = {
             TopAppBar(
                 title = {
                     Text(
@@ -56,9 +69,10 @@ fun ProfileScreen(appNavController: NavController) {
                 elevation = 0.dp
             )
         },
-
-        ) {
+    ) {
+//        fake data
         LazyColumn() {
+            //info
             item {
                 ConstraintLayout {
                     val (wallpaper, avatar, info) = createRefs()
@@ -72,15 +86,18 @@ fun ProfileScreen(appNavController: NavController) {
                             .fillMaxWidth()
                             .constrainAs(info) {
                                 top.linkTo(wallpaper.bottom)
-                            }
+                            },
+                        onEditProfileClicked = {
+                            appNavController.navigate(Screen.EditProfile.route)
+                        }
                     )
-
+                    //avt
                     Image(
                         painter = painterResource(id = R.drawable.avatar),
                         contentScale = ContentScale.Crop,
                         contentDescription = "avatar",
                         modifier = Modifier
-                            .size(80.dp)
+                            .size(AvatarInProfile)
                             .fillMaxSize()
                             .clip(CircleShape)
                             .constrainAs(avatar) {
@@ -91,6 +108,7 @@ fun ProfileScreen(appNavController: NavController) {
                     )
                 }
             }
+            //posts
             item {
                 Column() {
                     Spacer(modifier = Modifier.height(SpaceMedium))
@@ -113,44 +131,112 @@ fun ProfileScreen(appNavController: NavController) {
 @Composable
 fun WallpaperItem(modifier: Modifier = Modifier) {
     Box(modifier = modifier) {
+        //wallpaper pic
         Image(
-            painter = painterResource(id = com.vulong.socialnetwork.R.drawable.wallpaper),
+            painter = painterResource(id = R.drawable.wallpaper),
             contentDescription = "wallpaper",
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
         )
+
+        //brush bottom wallpaper
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
                 .background(
                     Brush.verticalGradient(
-                        listOf(Color.Transparent, Color(0x92000000))
+                        listOf(Color.Transparent, Color(0xC8000000))
                     )
                 )
         ) {
 
         }
+
+//        //skill and link
+//        Row(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .align(Alignment.BottomCenter),
+//            verticalAlignment = Alignment.CenterVertically,
+//            horizontalArrangement = Arrangement.SpaceBetween
+//        ) {
+//            Row(verticalAlignment = Alignment.CenterVertically) {
+//                IconButton(onClick = { }) {
+//                    Image(
+//                        painter = painterResource(id = R.drawable.ic_java),
+//                        contentDescription = "icon skill",
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                }
+//                IconButton(onClick = { }) {
+//                    Image(
+//                        painter = painterResource(id = R.drawable.ic_kotlin),
+//                        contentDescription = "icon skill",
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                }
+//                IconButton(onClick = { }) {
+//                    Image(
+//                        painter = painterResource(id = R.drawable.ic_python),
+//                        contentDescription = "icon skill",
+//                        modifier = Modifier.size(24.dp)
+//                    )
+//                }
+//            }
+//            Row(verticalAlignment = Alignment.CenterVertically) {
+//                IconButton(onClick = { /*TODO*/ }) {
+//                    Icon(
+//                        painter = painterResource(id = R.drawable.ic_github),
+//                        contentDescription = "icon link to github"
+//                    )
+//                }
+//                IconButton(onClick = { /*TODO*/ }) {
+//                    Icon(
+//                        painter = painterResource(id = R.drawable.ic_instagram),
+//                        contentDescription = "icon link to instagram"
+//                    )
+//                }
+//                IconButton(onClick = { /*TODO*/ }) {
+//                    Icon(
+//                        painter = painterResource(id = R.drawable.ic_linkedin),
+//                        contentDescription = "icon link to linkedin"
+//                    )
+//                }
+//            }
+//        }
     }
 }
 
+
 @Composable
-fun InfoItem(modifier: Modifier = Modifier) {
+fun InfoItem(
+    modifier: Modifier = Modifier,
+    onEditProfileClicked: () -> Unit,
+) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(50.dp))
         //Name,
-        Text(
-            text = "Vũ Long",
-            style = MaterialTheme.typography.body1,
-            fontWeight = FontWeight.Bold,
-            fontSize = 22.sp,
-            color = TextWhite
-        )
+        Box() {
+            Text(
+                modifier = Modifier.align(Alignment.Center),
+                text = "Vũ Long",
+                style = MaterialTheme.typography.body1,
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+                color = TextWhite
+            )
+            IconButton(
+                modifier = Modifier.align(Alignment.CenterEnd).offset(x = 45.dp),
+                onClick = { onEditProfileClicked() }) {
+                Icon(imageVector = Icons.Filled.Edit, contentDescription = "edit")
+            }
+        }
 
         Spacer(modifier = Modifier.height(SpaceSmall))
         //bio text
@@ -159,7 +245,7 @@ fun InfoItem(modifier: Modifier = Modifier) {
                     "quam ante, rutrum at pellentesque gravida, pretium in dui. Cras eget sapien" +
                     "velit. Suspendisse ut sem nec tellus vehicula eleifend sit amet quis velit." +
                     "Phasellus quis suscipit nisi. Nam",
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.body1,
             color = TextWhite,
             maxLines = 4,
             textAlign = TextAlign.Center,
@@ -178,13 +264,11 @@ fun InfoItem(modifier: Modifier = Modifier) {
             ) {
                 Text(text = "86",
                     style = MaterialTheme.typography.body1,
-                    fontSize = 20.sp,
                     color = TextWhite,
                     fontWeight = FontWeight.Bold)
                 Text(
                     text = "Followers",
-                    style = MaterialTheme.typography.body2,
-                    fontSize = 18.sp,
+                    style = MaterialTheme.typography.body1,
                     color = TextWhite,
                 )
             }
@@ -194,13 +278,11 @@ fun InfoItem(modifier: Modifier = Modifier) {
             ) {
                 Text(text = "86",
                     style = MaterialTheme.typography.body1,
-                    fontSize = 20.sp,
                     color = TextWhite,
                     fontWeight = FontWeight.Bold)
                 Text(
                     text = "Following",
-                    style = MaterialTheme.typography.body2,
-                    fontSize = 18.sp,
+                    style = MaterialTheme.typography.body1,
                     color = TextWhite,
                 )
             }
@@ -210,13 +292,11 @@ fun InfoItem(modifier: Modifier = Modifier) {
             ) {
                 Text(text = "206",
                     style = MaterialTheme.typography.body1,
-                    fontSize = 20.sp,
                     color = TextWhite,
                     fontWeight = FontWeight.Bold)
                 Text(
                     text = "Posts",
-                    style = MaterialTheme.typography.body2,
-                    fontSize = 18.sp,
+                    style = MaterialTheme.typography.body1,
                     color = TextWhite,
                 )
             }
@@ -326,3 +406,8 @@ fun PostItem(
 }
 
 
+@Preview
+@Composable
+fun ProfilePrev() {
+    ProfileScreen(appNavController = rememberNavController())
+}

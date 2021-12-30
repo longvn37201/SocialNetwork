@@ -38,7 +38,7 @@ import com.vulong.socialnetwork.util.Constants
 @Composable
 fun Post(
 //    post: Post,
-    profilePictureSize: Dp = 64.dp,
+    profilePictureSize: Dp = AvatarInPost,
 //    onUsernameClick: (String) -> Unit,
     onCommentClick: () -> Unit,
 ) {

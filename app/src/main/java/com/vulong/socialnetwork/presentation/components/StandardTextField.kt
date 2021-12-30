@@ -6,8 +6,11 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -21,11 +24,12 @@ fun StandardTextField(
     text: String = "",
     hint: String = "",
     maxLength: Int = 40,
+    singleLine: Boolean = true,
     error: String = "",
+    leadingIcon: @Composable (() -> Unit)? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     onValueChange: (String) -> Unit,
-
-    ) {
+) {
 
     val isPasswordToggleDisplayed by rememberSaveable() {
         mutableStateOf(
@@ -49,7 +53,7 @@ fun StandardTextField(
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType
             ),
-            singleLine = true,
+            singleLine = singleLine,
             onValueChange = {
                 if (it.length <= maxLength && !it.contains(" "))
                     onValueChange(it)
@@ -58,6 +62,7 @@ fun StandardTextField(
                 PasswordVisualTransformation()
             else
                 VisualTransformation.None,
+            leadingIcon = leadingIcon,
             trailingIcon = {
                 if (isPasswordToggleDisplayed) {
                     IconButton(onClick = {

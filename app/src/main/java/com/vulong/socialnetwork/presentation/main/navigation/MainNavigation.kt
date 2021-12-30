@@ -1,4 +1,4 @@
-package com.vulong.socialnetwork.presentation.main.util
+package com.vulong.socialnetwork.presentation.main.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -22,7 +22,7 @@ fun MainNavigation(
     NavHost(
         mainNavController,
         startDestination = ScreenInMain.NewsFeed.route,
-        Modifier.padding(innerPadding)
+        Modifier.padding(innerPadding)//padding scroll
     ) {
         composable(ScreenInMain.NewsFeed.route) {
             NewsFeedScreen(appNavController)

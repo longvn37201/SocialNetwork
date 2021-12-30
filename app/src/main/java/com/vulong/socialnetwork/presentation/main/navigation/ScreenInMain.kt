@@ -1,4 +1,4 @@
-package com.vulong.socialnetwork.presentation.main.util
+package com.vulong.socialnetwork.presentation.main.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*

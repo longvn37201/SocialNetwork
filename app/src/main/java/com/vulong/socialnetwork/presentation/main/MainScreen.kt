@@ -1,42 +1,31 @@
 package com.vulong.socialnetwork.presentation.main
 
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.LinearOutSlowInEasing
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.FloatingActionButtonDefaults.elevation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.vulong.socialnetwork.R
-import com.vulong.socialnetwork.presentation.main.util.MainNavigation
-import com.vulong.socialnetwork.presentation.main.util.ScreenInMain
+import com.vulong.socialnetwork.presentation.main.navigation.MainNavigation
+import com.vulong.socialnetwork.presentation.main.navigation.ScreenInMain
 import com.vulong.socialnetwork.presentation.ui.theme.SocialNetworkTheme
 import com.vulong.socialnetwork.presentation.ui.theme.SpaceSmall
-import com.vulong.socialnetwork.presentation.ui.theme.TextWhite
 
 @Composable
 fun MainScreen(appNavController: NavController) {
@@ -92,6 +81,7 @@ fun CustomBottomNavigation(mainNavController: NavController) {
         ScreenInMain.Notification,
         ScreenInMain.Profile,
     )
+
     BottomNavigation(
         modifier = Modifier.fillMaxWidth(),
         elevation = 0.dp

@@ -18,11 +18,17 @@ import androidx.navigation.NavController
 import com.vulong.socialnetwork.presentation.ui.theme.SpaceMedium
 import com.vulong.socialnetwork.presentation.ui.theme.SpaceSmall
 import com.vulong.socialnetwork.presentation.ui.theme.TextWhite
+import me.onebone.toolbar.CollapsingToolbarScaffold
+import me.onebone.toolbar.ScrollStrategy
+import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 
 @Composable
 fun NotificationScreen(appNavController: NavController) {
-    Scaffold(
-        topBar = {
+    CollapsingToolbarScaffold(
+        state = rememberCollapsingToolbarScaffoldState(), // provide the state of the scaffold
+        modifier = Modifier,
+        scrollStrategy = ScrollStrategy.EnterAlways,
+        toolbar = {
             TopAppBar(
                 title = {
                     Text(

@@ -15,10 +15,10 @@ import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.vulong.socialnetwork.R
 import com.vulong.socialnetwork.presentation.components.Post
+import com.vulong.socialnetwork.presentation.navigation.Screen
 import com.vulong.socialnetwork.presentation.ui.theme.MediumGray
 import com.vulong.socialnetwork.presentation.ui.theme.SpaceMedium
 import com.vulong.socialnetwork.presentation.ui.theme.TextWhite
-import com.vulong.socialnetwork.presentation.util.Screen
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
@@ -30,6 +30,8 @@ fun NewsFeedScreen(appNavController: NavController) {
 
     CollapsingToolbarScaffold(
         state = rememberCollapsingToolbarScaffoldState(), // provide the state of the scaffold
+        modifier = Modifier,
+        scrollStrategy = ScrollStrategy.EnterAlways,
         toolbar = {
             TopAppBar(
 
@@ -54,8 +56,6 @@ fun NewsFeedScreen(appNavController: NavController) {
 
             )
         },
-        modifier = Modifier,
-        scrollStrategy = ScrollStrategy.EnterAlways,
         body = {
             SideEffect {
                 systemUiController.setStatusBarColor(

@@ -1,4 +1,4 @@
-package com.vulong.socialnetwork.presentation.util
+package com.vulong.socialnetwork.presentation.navigation
 
 
 sealed class Screen(val route: String) {

@@ -1,4 +1,4 @@
-package com.vulong.socialnetwork.presentation.util
+package com.vulong.socialnetwork.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.vulong.socialnetwork.presentation.login.LoginScreen
 import com.vulong.socialnetwork.presentation.login.LoginViewModel
 import com.vulong.socialnetwork.presentation.main.MainScreen
+import com.vulong.socialnetwork.presentation.main.edit_profile.EditProfileScreen
 import com.vulong.socialnetwork.presentation.post_detail.CommentPostScreen
 import com.vulong.socialnetwork.presentation.post_detail.CommentViewModel
 import com.vulong.socialnetwork.presentation.register.RegisterScreen
@@ -45,5 +46,11 @@ fun AppNavigation() {
                 commentViewModel = commentViewModel
             )
         }
+        composable(Screen.EditProfile.route) {
+            EditProfileScreen(
+                appNavController = appNavController,
+            )
+        }
+
     }
 }

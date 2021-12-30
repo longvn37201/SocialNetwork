@@ -17,11 +17,11 @@ import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.vulong.socialnetwork.R
 import com.vulong.socialnetwork.presentation.components.StandardTextField
+import com.vulong.socialnetwork.presentation.navigation.Screen
 import com.vulong.socialnetwork.presentation.ui.theme.DarkGray
 import com.vulong.socialnetwork.presentation.ui.theme.SpaceLarge
 import com.vulong.socialnetwork.presentation.ui.theme.SpaceMedium
 import com.vulong.socialnetwork.presentation.ui.theme.SpaceSmall
-import com.vulong.socialnetwork.presentation.util.Screen
 
 @Composable
 fun LoginScreen(
